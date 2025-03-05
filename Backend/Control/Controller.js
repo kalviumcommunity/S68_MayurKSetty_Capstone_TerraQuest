@@ -1,5 +1,6 @@
 const UserModel = require('../Model/UserSchema');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const getOne = async (req, res) => {
     const { name, email, password } = req.body;
@@ -54,5 +55,7 @@ const postOne = async (req, res) => {
         res.status(500).json({ Message: "There was an error while creating the user", error: err });
     }
 };
+
+const 
 
 module.exports = {getOne, postOne};
