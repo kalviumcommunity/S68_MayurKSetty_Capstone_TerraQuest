@@ -56,6 +56,5 @@ const postOne = async (req, res) => {
     }
 };
 
-const 
 
 module.exports = {getOne, postOne};
