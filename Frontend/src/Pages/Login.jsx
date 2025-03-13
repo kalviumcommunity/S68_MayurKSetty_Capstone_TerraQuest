@@ -38,6 +38,10 @@ function Login() {
                     <label>Password</label>
                     <input type="password" value={formdata.password} onChange={(e)=>setformdata({...formdata,password:e.target.value})} />
                 </div>
+
+                <div>
+                    <input type="submit"/>
+                </div>
             </form>
         </div>    
     </>
