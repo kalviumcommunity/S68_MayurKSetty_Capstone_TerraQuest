@@ -9,7 +9,7 @@ function Signup() {
 });
 
 const handlesubmit = async (e) => {
-    e.preventdefault();
+   e.preventDefault();
     if(!formdata.email||!formdata.password ||!formdata.confirmPassword){
         alert("All the fields are required!")
         return
