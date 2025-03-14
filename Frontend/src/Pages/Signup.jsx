@@ -26,6 +26,12 @@ const handlesubmit = async (e) => {
     try{
         await axios.post('http://localhost:3000/api/signup',tosend);
         console.log("data sent successfully using axios for login!")
+        setformdata({
+            name:"",
+            email:"",
+            password:"",
+            confirmPassword:""
+        });
     }
     
     catch(err){
