@@ -8,7 +8,7 @@ function Login() {
     });
 
     const handlesubmit = async (e) => {
-        e.preventdefault();
+        e.preventDefault();
         if(!formdata.email||!formdata.password){
             alert("All the fields are required!")
             return
@@ -16,6 +16,10 @@ function Login() {
         try{
             await axios.post('http://localhost:3000/api/login',formdata);
             console.log("data sent successfully using axios for login!")
+            setformdata({
+            email:"",
+            password:""
+            })
         }
         
         catch(err){
@@ -37,6 +41,10 @@ function Login() {
                 <div>
                     <label>Password</label>
                     <input type="password" value={formdata.password} onChange={(e)=>setformdata({...formdata,password:e.target.value})} />
+                </div>
+
+                <div>
+                    <input type="submit"/>
                 </div>
             </form>
         </div>    
