@@ -86,4 +86,5 @@ Check out the **main project roadmap** for the latest progress and feature imple
 This document serves as a **brief assignment overview** and will evolve as development progresses.  
 
 [Frontend Deploy](https://terraquest.netlify.app/)
+
 [Documentation](https://docs.google.com/document/d/1U3TmqffF8EQVwXoUP9U88xDnMpCyP3nO3NMakEZGK_0/edit?usp=sharing)
