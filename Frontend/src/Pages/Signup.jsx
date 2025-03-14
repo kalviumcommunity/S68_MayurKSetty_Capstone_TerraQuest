@@ -35,7 +35,7 @@ const handlesubmit = async (e) => {
     }
     
     catch(err){
-        console.log("There was an error while sending login from frontend!", err);
+        console.log("There was an error while sending signup from frontend!", err);
     }
   }
   else{
