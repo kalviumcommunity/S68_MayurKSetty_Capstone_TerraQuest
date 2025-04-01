@@ -6,8 +6,10 @@ function Navbar() {
     <nav className='bg-black text-white p-4 flex items-center justify-between w-full'>
       <div className='flex items-center justify-between w-full'>
         <div>
+          <NavLink to='/'>
           <h1 className='text-3xl font-jersey font-bold bg-gradient-to-r from-[#59B700] via-[#7a8a6b] to-[#838080] bg-clip-text text-transparent'>TerraQuest</h1>
           <span className='text-sm text-gray-400'>A quest to discover Earth's biodiversity.</span>
+          </NavLink>
         </div>
         <div className='flex-1 flex justify-around space-x-6 text-lg'>
           <NavLink to='/' className={({ isActive }) => isActive ? 'bg-gradient-to-r from-[#59B700] via-[#79a94b] to-[#838080] bg-clip-text text-transparent font-extrabold' : 'hover:text-gray-400 font-extrabold'}>Home</NavLink>

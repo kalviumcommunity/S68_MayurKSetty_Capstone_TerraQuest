@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import background from '../assets/Backgrounds/Login-signup-bg.png'
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [formdata, setformdata] = useState({
     email: '',
     password: ''
   });
+
+  const [visible,setVisible] = useState(false);
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -43,12 +47,19 @@ function Login() {
             <div className="text-left">
               <label className="text-black text-2xl font-bold">Password</label>
               <input
-                type="password"
+                type={visible ? 'text' : 'password'}
                 value={formdata.password}
                 onChange={(e) => setformdata({ ...formdata, password: e.target.value })}
                 className="w-full h-18 bg-white p-3 mt-1 border border-black rounded-4xl focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your password"
               />
+                  <button
+                    type="button"
+                    onClick={()=>setVisible(prev=>!prev)}
+                    className="absolute top-126 right-140"
+                  >
+                    {visible?<FaRegEye />:<FaRegEyeSlash />}
+                  </button>
             </div>
             <div className="flex items-center text-left">
               <input type="checkbox" className="mr-2 w-5 h-5" />
