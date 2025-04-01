@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard({
   img,
@@ -8,7 +9,10 @@ function Dashboard({
   streak,
   leaderboard,
   events,
-}) {
+}) 
+{
+  const navigate = useNavigate();
+
   return (
     <div className="p-4 m-4 w-5xl h-60 bg-gray-200 rounded-lg shadow-lg flex flex-col md:flex-row items-center md:items-start gap-4">
       {/* Profile Section */}
@@ -43,7 +47,7 @@ function Dashboard({
           <strong>Leaderboard:</strong> {leaderboard} India
         </p>
         <div className="flex gap-4 mt-20">
-          <button className="bg-gradient-to-br from-[#59B700] via-[#6f964a] to-[#838080] hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+          <button onClick={()=>navigate('/submit')} className="bg-gradient-to-br from-[#59B700] via-[#6f964a] to-[#838080] hover:bg-green-600 text-white px-4 py-2 rounded-lg">
             Upload
           </button>
           <button className="border border-gray-500 text-gray-500 px-4 py-2 rounded-lg">
