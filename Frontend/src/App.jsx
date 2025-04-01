@@ -5,6 +5,11 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Navbar from "./Components/Navbar";
+import Learn from "./Pages/Learn";
+import Explore from "./Pages/Explore";
+import Track from "./Pages/Track";
+import Submit from "./Pages/Submit";
+import Community from "./Pages/Community";
 
 function App() {
   return (
@@ -14,6 +19,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/explore" element={<Explore/>} />
+        <Route path="/learn" element={<Learn/>} />
+        <Route path="/track" element={<Track/>} />
+        <Route path="/submit" element={<Submit/>} />
+        <Route path="/community" element={<Community/>} />
       </Routes>
     </>
   );
