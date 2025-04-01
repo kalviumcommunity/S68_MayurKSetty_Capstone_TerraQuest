@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format:file": "prettier --write",
+    "format:all": "prettier --write 'src/**/*.{js,jsx}'",
+    "format:tailwind": "prettier --write 'src/**/*.{js,jsx,ts,tsx,html}'"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.14",
@@ -26,6 +29,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4.0.14",
     "vite": "^6.2.0"
   }
