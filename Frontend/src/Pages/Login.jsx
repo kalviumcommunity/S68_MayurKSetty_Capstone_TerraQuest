@@ -3,6 +3,7 @@ import axios from "axios";
 import background from "../assets/Backgrounds/Login-signup-bg.png";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Login() {
   const [formdata, setformdata] = useState({
@@ -25,6 +26,25 @@ function Login() {
     } catch (err) {
       console.log("There was an error while sending login from frontend!", err);
     }
+  };
+
+
+  //Google auth
+  const handleSuccess = async (response) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/auth/google/callback", {
+        token: response.credential, // Google OAuth Token
+      });
+
+      console.log("Login Successful:", res.data);
+      localStorage.setItem("token", res.data.token); // Store token for authentication
+    } catch (error) {
+      console.error("Google OAuth Error:", error);
+    }
+  };
+
+  const handleError = () => {
+    console.log("Google Login Failed");
   };
 
   return (
@@ -80,6 +100,7 @@ function Login() {
             >
               Login
             </button>
+            <GoogleLogin onSuccess={handleSuccess} onError={handleError}/>
           </form>
         </div>
       </div>
