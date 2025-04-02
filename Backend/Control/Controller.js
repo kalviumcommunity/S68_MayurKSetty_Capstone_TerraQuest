@@ -1,6 +1,7 @@
 const UserModel = require('../Model/UserSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require("dotenv").config();
 
 //user manipulation
 
@@ -70,7 +71,7 @@ const login = async (req, res) => {
         }
 
         if (!user.password) {
-            return res.status(400).json({ message: "This account does not have a password. Try social login." });
+            return res.status(400).json({ message: "couldn't find a password for this account" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
@@ -87,7 +88,15 @@ const login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         // token is set in the response headers
-        res.setHeader("Authorization", `Bearer ${token}`);
+        // res.setHeader("Authorization", `Bearer ${token}`);
+
+        res.cookie("token", token, { 
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === "production", 
+            sameSite: "strict", 
+            maxAge: 3600000, //1h
+        });
+        
 
         res.status(200).json({ //success
             message: "Login successful",
