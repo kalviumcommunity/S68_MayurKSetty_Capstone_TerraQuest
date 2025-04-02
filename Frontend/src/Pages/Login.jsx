@@ -20,7 +20,7 @@ function Login() {
     }
     try {
       await axios.post("http://localhost:3000/api/login", formdata);
-      console.log("Data sent successfully using axios for login!");
+      console.log("Data sent successfully using axios for login!",formdata);
       setformdata({ email: "", password: "" });
     } catch (err) {
       console.log("There was an error while sending login from frontend!", err);
