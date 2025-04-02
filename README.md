@@ -88,3 +88,52 @@ This document serves as a **brief assignment overview** and will evolve as devel
 [Frontend Deploy](https://terraquest.netlify.app/)
 
 [Documentation](https://docs.google.com/document/d/1U3TmqffF8EQVwXoUP9U88xDnMpCyP3nO3NMakEZGK_0/edit?usp=sharing)
+
+
+# **Contributing to Terraquest**  
+Thank you for your interest in contributing to **Terraquest**! Please follow these guidelines to set up the project locally and submit a Pull Request (PR).
+
+## **Instructions for Setting Up the Project Locally and Opening a PR**
+1. **Fork the repository** on GitHub.  
+2. **Clone the forked repository** to your local machine using the following command:  
+   ```sh
+   git clone <your-forked-repo-url>
+   ```
+3. Ensure that **Node.js and npm** are installed on your system. If not, refer to the [official installation guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).  
+4. **Navigate to the cloned repository** in your terminal:  
+   ```sh
+   cd terraquest
+   ```
+5. **Install frontend dependencies**:  
+   ```sh
+   cd frontend
+   npm install
+   ```
+6. **Install backend dependencies**:  
+   ```sh
+   cd ../backend
+   npm install
+   ```
+7. **Start the frontend development server**:  
+   ```sh
+   cd ../frontend
+   npm run dev
+   ```
+8. **Start the backend server**:  
+   ```sh
+   cd ../backend
+   node --watch index
+   ```
+9. **Make your changes** and test the functionality.  
+10. **Lint and format your code** before committing:  
+    ```sh
+    npm run format:file <file-path>
+    ```
+11. **Commit your changes**:  
+    ```sh
+    git add .
+    git commit -m "Describe your changes"
+    git push origin <your-branch-name>
+    ```
+12. **Open a Pull Request (PR)** on GitHub from your forked repository to the main repository.  
+13. Once reviewed, your changes will be merged. 🎉  
