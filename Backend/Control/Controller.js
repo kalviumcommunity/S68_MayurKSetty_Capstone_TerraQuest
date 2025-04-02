@@ -2,6 +2,78 @@ const UserModel = require('../Model/UserSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
+const passport = require("passport");
+const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
+
+// google authentication endpoints...
+
+passport.use( //
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "/api/auth/google/callback",
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          let user = await UserModel.findOne({ email: profile.emails[0].value });
+  
+          if (!user) {
+            user = await UserModel.create({
+              name: profile.displayName,
+              email: profile.emails[0].value,
+              isOAuthUser: true, // Mark as OAuth user
+            });
+          }
+  
+          return done(null, user);
+        } catch (error) {
+          return done(error, null);
+        }
+      }
+    )
+  );
+
+  // Serialize & Deserialize User
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+  });
+
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await UserModel.findById(id);
+      done(null, user);
+    } catch (error) {
+      done(error, null);
+    }
+  });
+
+  // Google Login Route
+const googleAuth = passport.authenticate("google", { scope: ["profile", "email"] });
+
+const googleCallback = passport.authenticate("google", { failureRedirect: "/" });
+
+const googleRedirect = async (req, res) => {
+  try {
+    const user = req.user;
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 3600000, // 1 hour
+    });
+
+    // res.redirect(`http://localhost:5173?token=${token}`);
+    res.status(200).json({Message:"logged in using Google!"});
+    console.log("successfully logged in using google auth");
+    
+  } catch (error) {
+    console.error("Google Authentication Error:", error);
+    res.status(500).json({ message: "Google authentication failed", error });
+  }
+};
 
 //user manipulation
 
@@ -103,6 +175,7 @@ const login = async (req, res) => {
             token,
             user: { id: user._id, name: user.name, email: user.email }
         });
+        console.log("success")
 
     } catch (error) {//error
         console.error("Login Error:", error);
@@ -146,4 +219,4 @@ const editOne = async (req, res) => {
 
 
 
-module.exports = {getOne,postOne,editOne,login};
+module.exports = {getOne, postOne, editOne, login, googleAuth, googleCallback, googleRedirect};
