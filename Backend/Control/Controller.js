@@ -1,9 +1,16 @@
+// generic imports
 const UserModel = require('../Model/UserSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
+
+//google imports
 const passport = require("passport");
 const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
+
+// cloudinary imports
+const cloudinary = require('../Cloudinary/CloudinaryConfig')
+const fs = require('fs');
 
 // google authentication endpoints...
 
@@ -218,5 +225,26 @@ const editOne = async (req, res) => {
 };
 
 
+// Cloudinary
+const uploadImage = async (req, res) => {
+  try {
+      if (!req.file) {
+          return res.status(400).json({ error: 'No file uploaded' });
+      }
 
-module.exports = {getOne, postOne, editOne, login, googleAuth, googleCallback, googleRedirect};
+      // Upload file to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      // Delete local file after upload
+      fs.unlinkSync(req.file.path);
+
+      // Send Cloudinary URL as response
+      res.json({ url: result.secure_url });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+module.exports = {getOne, postOne, editOne, login, googleAuth, googleCallback, googleRedirect, uploadImage};

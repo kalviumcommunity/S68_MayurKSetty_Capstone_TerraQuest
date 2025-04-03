@@ -5,7 +5,7 @@ const cors = require('cors');
 const ConnectDB = require('./Database/db');
 const router = require('./Router/Router');
 const cookieParser = require('cookie-parser');
-
+const multer = require('multer');
 
 const port = process.env.PORT;
 const url = process.env.db_url;
