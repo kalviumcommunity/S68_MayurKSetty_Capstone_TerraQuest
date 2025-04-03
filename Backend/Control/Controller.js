@@ -82,6 +82,8 @@ const googleRedirect = async (req, res) => {
   }
 };
 
+
+
 //user manipulation
 
 const getOne = async (req, res) => {

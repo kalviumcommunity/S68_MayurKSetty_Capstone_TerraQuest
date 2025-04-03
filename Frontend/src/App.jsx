@@ -10,6 +10,7 @@ import Explore from "./Pages/Explore";
 import Track from "./Pages/Track";
 import Submit from "./Pages/Submit";
 import Community from "./Pages/Community";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/track" element={<Track/>} />
         <Route path="/submit" element={<Submit/>} />
         <Route path="/community" element={<Community/>} />
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </>
   );
