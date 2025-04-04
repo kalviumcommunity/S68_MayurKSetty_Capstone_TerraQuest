@@ -85,21 +85,21 @@ const googleRedirect = async (req, res) => {
 //user manipulation
 
 const getOne = async (req, res) => {
-  const { name, email, password } = req.body;
+  const userId = req.user;
 
-  if (!name || !email || !password) {
+  if (!userId) {
     res.status(400).json({ Message: 'All fields are required.' });
     console.log('All the fields are necessary!');
     return;
   }
 
   try {
-    const userexist = await UserModel.findOne({ email: email });
+    const userexist = await UserModel.findById(userId);
 
     if (!userexist) {
       return res.status(404).json({ Message: 'The user could not be found!' });
     }
-
+    
     res.status(200).json({ Message: 'User Found!', Userdata: userexist });
   } catch (err) {
     console.error('Error finding user:', err);
@@ -223,17 +223,26 @@ const editOne = async (req, res) => {
 const uploadImage = async (req, res) => {
   try {
     if (!req.file) {
+      console.log("there was an error getting th file");
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
     // Upload file to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(req.file.path , {folder:'TerraQuest'});
+    if (!result) {
+      console.log("there was an error in uploading");
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
 
     // Delete local file after upload
     fs.unlinkSync(req.file.path);
 
+    const userId = req.user;
+    const updatedprofile = UserModel.findByIdAndUpdate({_id:userId},{profilePic:result.secure_url},{new:true});
+    console.log(updatedprofile);
+
     // Send Cloudinary URL as response
-    res.json({ url: result.secure_url });
+    res.json({ url: result.secure_url, profile:updatedprofile });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

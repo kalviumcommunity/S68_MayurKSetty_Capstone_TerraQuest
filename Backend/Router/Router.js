@@ -13,10 +13,10 @@ const router = express.Router();
 const multer = require('multer');
 
 //middleware
-const authMiddleware = require('../Middleware/AuthMiddleware');
+const AuthMiddleware = require('../Middleware/AuthMiddleware');
 
 //user routes
-router.get('/getone', getOne);
+router.get('/getuser',AuthMiddleware, getOne);
 router.post('/signup', postOne);
 router.post('/login', login);
 router.put('/edituser/:id', editOne);
@@ -27,6 +27,6 @@ router.get('/auth/google/callback', googleCallback, googleRedirect);
 
 //Cloudinary
 const upload = multer({ dest: 'uploads/' });
-router.post('/upload', upload.single('image'), uploadImage);
+router.post('/upload',AuthMiddleware, upload.single('image'), uploadImage);
 
 module.exports = router;

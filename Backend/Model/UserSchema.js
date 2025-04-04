@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
       return !this.isOAuthUser;
     },
   }, // Optional for OAuth users
+  profilePic:{type: String, default:"https://res.cloudinary.com/dh4zgual6/image/upload/v1743779736/user_1_vy5jcs.png"},
   isOAuthUser: { type: Boolean, default: false },
 });
 

@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EditProfile from "../Components/Profile/EditProfile";
 import ChangeProfilePic from "../Components/Profile/ChangeProfilePic";
+import axios from "axios";
 
 function Profile() {
   const [showEdit, setShowEdit] = useState(null);
   const [showChangePic, setShowChangePic] = useState(false);
+  const [userData, setUserData] = useState({});
 
-  const userData = {
-    name: "Mayura Droid",
-    email: "mayurDroid@example.com",
-    password: "••••••••",
-  };
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/getuser");
+
+        if (!response.data) {
+          return console.log("There was an error fetching the data");
+        }
+
+        setUserData(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getUserData();
+  }, []);
 
   return (
     <>
@@ -18,7 +32,7 @@ function Profile() {
         {/* Profile Picture */}
         <div className="relative w-40 h-40">
           <img
-            src="https://via.placeholder.com/150"
+            src={userData.profileImage}
             alt="Profile"
             className="w-full h-full object-cover border-4 rounded-full"
           />
@@ -32,7 +46,7 @@ function Profile() {
 
         {/* Info Cards */}
         <div className="flex flex-col mt-20 gap-4 w-full max-w-md">
-          {["name", "email", "password"].map((field) => (
+          {[userData.name, userData.email, userData.password].map((field) => (
             <div
               key={field}
               className="flex justify-between items-center bg-gray-100 border p-4 rounded"
