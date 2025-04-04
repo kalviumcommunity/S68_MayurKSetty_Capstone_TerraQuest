@@ -3,6 +3,7 @@ import axios from "axios";
 import background from "../assets/Backgrounds/Login-signup-bg.png";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Signup() {
   const [formdata, setformdata] = useState({
@@ -51,6 +52,24 @@ function Signup() {
     }
   };
 
+    //Google auth
+    const handleSuccess = async (response) => {
+      try {
+        const res = await axios.post("http://localhost:3000/api/auth/google/callback", {
+          token: response.credential, // Google OAuth Token
+        });
+  
+        console.log("Login Successful:", res.data);
+        localStorage.setItem("token", res.data.token); // Store token for authentication
+      } catch (error) {
+        console.error("Google OAuth Error:", error);
+      }
+    };
+  
+    const handleError = () => {
+      console.log("Google Login Failed");
+    };
+
   return (
     <div className="h-screen bg-gray-100 flex flex-col items-center">
       <div
@@ -58,7 +77,7 @@ function Signup() {
         style={{ backgroundImage: `url(${background})` }}
       >
         <div className="max-w-180 mx-auto mt-4 p-10 bg-[#94c864] shadow-lg rounded-2xl text-center">
-          <h1 className="text-4xl font-bold text-black mb-6">Signup</h1>
+          <h1 className="text-4xl font-bold text-black">Signup</h1>
           <form onSubmit={handlesubmit} className="space-y-4">
             <div className="text-left">
               <label className="text-black text-xl font-bold">Name</label>
@@ -98,7 +117,7 @@ function Signup() {
               <button
                 type="button"
                 onClick={() => setVisible((prev) => !prev)}
-                className="absolute top-129 right-115"
+                className="absolute top-123 right-115"
               >
                 {visible ? <FaRegEye /> : <FaRegEyeSlash />}
               </button>
@@ -119,7 +138,7 @@ function Signup() {
               <button
                 type="button"
                 onClick={() => setVisible((prev) => !prev)}
-                className="absolute top-156 right-115"
+                className="absolute top-150 right-115"
               >
                 {visible ? <FaRegEye /> : <FaRegEyeSlash />}
               </button>
@@ -130,6 +149,7 @@ function Signup() {
             >
               Signup
             </button>
+            <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
           </form>
         </div>
       </div>
