@@ -1,42 +1,42 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const SightingSchema = new mongoose.Schema({
-    type: {
+  type: {
+    type: String,
+    enum: ['FeatureCollection'],
+    required: true,
+    default: 'FeatureCollection',
+  },
+  features: [
+    {
+      type: {
         type: String,
-        enum: ["FeatureCollection"],
+        enum: ['Feature'],
         required: true,
-        default: "FeatureCollection",
-    },
-    features: [
-        {
-            type: {
-                type: String,
-                enum: ["Feature"],
-                required: true,
-                default: "Feature",
-            },
-            properties: {
-                type: Object, 
-                default: {},
-            },
-            geometry: {
-                type: {
-                    type: String,
-                    enum: ["Point", "LineString"], // Supports Point and LineString
-                    required: true,
-                },
-                coordinates: {
-                    type: Array, // Accepts both `[longitude, latitude]` for Points and arrays of such pairs for LineString
-                    required: true,
-                },
-            },
+        default: 'Feature',
+      },
+      properties: {
+        type: Object,
+        default: {},
+      },
+      geometry: {
+        type: {
+          type: String,
+          enum: ['Point', 'LineString'], // Supports Point and LineString
+          required: true,
         },
-    ],
+        coordinates: {
+          type: Array, // Accepts both `[longitude, latitude]` for Points and arrays of such pairs for LineString
+          required: true,
+        },
+      },
+    },
+  ],
 });
 
-SightingSchema.index({ "features.geometry": "2dsphere" }); // Enables geospatial queries
+SightingSchema.index({ 'features.geometry': '2dsphere' }); // Enables geospatial queries
 
-const Sighting = mongoose.model("Sighting", SightingSchema);
+const Sighting = mongoose.model('Sighting', SightingSchema);
 module.exports = Sighting;
 
 //examples:
@@ -78,4 +78,3 @@ module.exports = Sighting;
 //     .save()
 //     .then(() => console.log("FeatureCollection saved successfully"))
 //     .catch((err) => console.error("Error saving:", err));
-

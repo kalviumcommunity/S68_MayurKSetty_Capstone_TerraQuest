@@ -12,11 +12,11 @@ const url = process.env.db_url;
 
 app.use(express.json());
 app.use(cors());
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use('/api',router);
+app.use('/api', router);
 
 app.listen(port, async () => {
-    await ConnectDB(url);
-    console.log(`The server is running on port:${port} Link: http://localhost:${port}`);
+  await ConnectDB(url);
+  console.log(`The server is running on port:${port} Link: http://localhost:${port}`);
 });
