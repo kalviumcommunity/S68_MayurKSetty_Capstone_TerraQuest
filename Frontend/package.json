@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "format:file": "prettier --write",
     "format:all": "prettier --write 'src/**/*.{js,jsx}'",
-    "format:tailwind": "prettier --write 'src/**/*.{js,jsx,ts,tsx,html}'"
+    "format:tailwind": "prettier --write 'src/**/*.{js,jsx,ts,tsx,html}'",
+    "format:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx,html}'"
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
