@@ -165,9 +165,6 @@ const login = async (req, res) => {
     // Generation of the Token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    // token is set in the response headers
-    // res.setHeader("Authorization", `Bearer ${token}`);
-
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

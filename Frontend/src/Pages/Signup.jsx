@@ -52,23 +52,26 @@ function Signup() {
     }
   };
 
-    //Google auth
-    const handleSuccess = async (response) => {
-      try {
-        const res = await axios.post("http://localhost:3000/api/auth/google/callback", {
+  //Google auth
+  const handleSuccess = async (response) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/auth/google/callback",
+        {
           token: response.credential, // Google OAuth Token
-        });
-  
-        console.log("Login Successful:", res.data);
-        localStorage.setItem("token", res.data.token); // Store token for authentication
-      } catch (error) {
-        console.error("Google OAuth Error:", error);
-      }
-    };
-  
-    const handleError = () => {
-      console.log("Google Login Failed");
-    };
+        },
+      );
+
+      console.log("Login Successful:", res.data);
+      localStorage.setItem("token", res.data.token); // Store token for authentication
+    } catch (error) {
+      console.error("Google OAuth Error:", error);
+    }
+  };
+
+  const handleError = () => {
+    console.log("Google Login Failed");
+  };
 
   return (
     <div className="h-screen bg-gray-100 flex flex-col items-center">

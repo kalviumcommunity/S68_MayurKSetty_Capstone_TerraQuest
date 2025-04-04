@@ -20,24 +20,29 @@ function Login() {
       return;
     }
     try {
-      await axios.post("http://localhost:3000/api/login", formdata);
-      console.log("Data sent successfully using axios for login!",formdata);
+      await axios.post("http://localhost:3000/api/login", formdata, {
+        withCredentials: true,
+      });
+      console.log("Data sent successfully using axios for login!", formdata);
       setformdata({ email: "", password: "" });
     } catch (err) {
       console.log("There was an error while sending login from frontend!", err);
     }
   };
 
-
   //Google auth
   const handleSuccess = async (response) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/google/callback", {
-        token: response.credential, // Google OAuth Token
-      });
+      const res = await axios.post(
+        "http://localhost:3000/api/auth/google/callback",
+        {
+          token: response.credential, // Google OAuth Token
+        },
+      );
 
       console.log("Login Successful:", res.data);
-      localStorage.setItem("token", res.data.token); // Store token for authentication
+      // localStorage.setItem("token", res.data.token);
+      document.cookie = `token=${res.data.token}`; // Store token for authentication
     } catch (error) {
       console.error("Google OAuth Error:", error);
     }
@@ -100,7 +105,7 @@ function Login() {
             >
               Login
             </button>
-            <GoogleLogin onSuccess={handleSuccess} onError={handleError}/>
+            <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
           </form>
         </div>
       </div>

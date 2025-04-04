@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
 function ChangeProfilePic({ show, onClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -12,25 +12,25 @@ function ChangeProfilePic({ show, onClose }) {
   };
 
   const handleUpload = () => {
-    console.log('Upload image:', selectedFile);
+    console.log("Upload image:", selectedFile);
     // TODO: send file to server or Cloudinary
     onClose();
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
-    dropRef.current.classList.add('border-blue-400');
+    dropRef.current.classList.add("border-blue-400");
   };
 
   const handleDragLeave = () => {
-    dropRef.current.classList.remove('border-blue-400');
+    dropRef.current.classList.remove("border-blue-400");
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
-    dropRef.current.classList.remove('border-blue-400');
+    dropRef.current.classList.remove("border-blue-400");
     const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith('image/')) {
+    if (file && file.type.startsWith("image/")) {
       setSelectedFile(file);
       setPreviewUrl(URL.createObjectURL(file));
     }
@@ -49,10 +49,12 @@ function ChangeProfilePic({ show, onClose }) {
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          onClick={() => document.getElementById('fileInput').click()}
+          onClick={() => document.getElementById("fileInput").click()}
           className="w-full h-28 mb-4 flex items-center justify-center border-2 border-dashed border-gray-300 rounded cursor-pointer text-gray-500 text-center transition-colors"
         >
-          {previewUrl ? 'Drop another image or click to replace' : 'Drag & drop or click to upload an image'}
+          {previewUrl
+            ? "Drop another image or click to replace"
+            : "Drag & drop or click to upload an image"}
         </div>
 
         {/* File input */}

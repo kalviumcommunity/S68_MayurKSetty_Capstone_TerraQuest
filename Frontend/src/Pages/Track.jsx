@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Track() {
-  return (
-    <div>Track</div>
-  )
+  return <div>Track</div>;
 }
 
-export default Track
+export default Track;
