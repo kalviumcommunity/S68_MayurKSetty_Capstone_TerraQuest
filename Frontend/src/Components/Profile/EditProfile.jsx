@@ -49,7 +49,7 @@ function EditProfile({ show, onClose, label, type = "text", currentValue }) {
           </button>
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-4 py-2 bg-[#94c864] text-white rounded hover:bg-[#85f387]"
           >
             Save
           </button>

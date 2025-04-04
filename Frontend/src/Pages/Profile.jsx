@@ -30,7 +30,7 @@ function Profile() {
               </div>
               <button
                 onClick={() => setShowEdit(field)}
-                className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                className="bg-[#94c864] text-white px-3 py-1 rounded hover:bg-[#6fc870]"
               >
                 Edit
               </button>
