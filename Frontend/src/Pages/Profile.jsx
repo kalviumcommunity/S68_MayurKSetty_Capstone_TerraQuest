@@ -1,41 +1,53 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
+import EditProfile from '../Components/Profile/EditProfile';
 
 function Profile() {
-//     const[userdata,setUserData] = useState({});
+  const [showEdit, setShowEdit] = useState(null); // need to update the state when importing using axios
 
-    // useEffect(()=>{
-    //     axios.get("http://localhost:3000/api/")
-    // })
+  const userData = { // hardcoded test data
+    name: 'Mayura Droid',
+    email: 'mayurDroid@example.com',
+    password: '••••••••'
+  };
+
   return (
     <>
-        <div className='flex flex-col items-center m-8'>
-            <div>
-                <img src="" alt="" className='border-4 w-40 h-40 rounded-full' />
-            </div>
-            <div className='flex flex-col mt-20 gap-4'>
-                <div className='flex flex-row gap-2'>
-                    <div className='border-2 bg-gray-100 w-3xl items-center flex flex-col'>
-                        <p>{'Name'}</p>
-                    </div>
-                    <button className='border-2 w-20'>Edit</button>
-                </div>
-                <div className='flex flex-row gap-2'>
-                    <div className='border-2 bg-gray-100 w-3xl items-center flex flex-col'>
-                        <p>{'Email'}</p>
-                    </div>
-                    <button className='border-2 w-20'>Edit</button>
-                </div>
-                <div className='flex flex-row gap-2'>
-                    <div className='border-2 bg-gray-100 w-3xl items-center flex flex-col'>
-                        <p>{'Password'}</p>
-                    </div>
-                    <button className='border-2 w-20'>Edit</button>
-                </div>
-            </div>
+      <div className="flex flex-col items-center m-8">
+        <div>
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Profile"
+            className="border-4 w-40 h-40 rounded-full object-cover"
+          />
         </div>
+
+        <div className="flex flex-col mt-20 gap-4 w-full max-w-md">
+          {['name', 'email', 'password'].map((field) => (
+            <div key={field} className="flex justify-between items-center bg-gray-100 border p-4 rounded">
+              <div>
+                <p className="font-medium capitalize">{field}</p>
+                <p>{userData[field]}</p>
+              </div>
+              <button
+                onClick={() => setShowEdit(field)}
+                className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <EditProfile
+        show={!!showEdit}
+        onClose={() => setShowEdit(null)}
+        label={showEdit || ""}
+        type={showEdit === 'password' ? 'password' : 'text'}
+        currentValue={userData[showEdit]}
+      />
     </>
-  )
+  );
 }
 
-export default Profile
+export default Profile;
