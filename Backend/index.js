@@ -5,18 +5,18 @@ const cors = require('cors');
 const ConnectDB = require('./Database/db');
 const router = require('./Router/Router');
 const cookieParser = require('cookie-parser');
-
+const multer = require('multer');
 
 const port = process.env.PORT;
 const url = process.env.db_url;
 
 app.use(express.json());
 app.use(cors());
-app.use(cookieParser())
+app.use(cookieParser());
 
-app.use('/api',router);
+app.use('/api', router);
 
 app.listen(port, async () => {
-    await ConnectDB(url);
-    console.log(`The server is running on port:${port} Link: http://localhost:${port}`);
+  await ConnectDB(url);
+  console.log(`The server is running on port:${port} Link: http://localhost:${port}`);
 });
