@@ -94,7 +94,7 @@ const getOne = async (req, res) => {
   }
 
   try {
-    const userexist = await UserModel.findById(userId);
+    const userexist = await UserModel.findById(userId.id);
 
     if (!userexist) {
       return res.status(404).json({ Message: 'The user could not be found!' });

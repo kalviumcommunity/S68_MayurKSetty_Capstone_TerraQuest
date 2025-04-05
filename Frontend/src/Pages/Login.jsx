@@ -20,7 +20,9 @@ function Login() {
       return;
     }
     try {
-      await axios.post("http://localhost:3000/api/login", formdata);
+      await axios.post("http://localhost:3000/api/login", formdata, {
+        withCredentials: true,
+      });
       console.log("Data sent successfully using axios for login!", formdata);
       setformdata({ email: "", password: "" });
     } catch (err) {

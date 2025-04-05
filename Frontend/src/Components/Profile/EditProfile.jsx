@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
-function EditProfile({ show, onClose, label, type = "text", currentValue }) {
+function EditProfile({
+  key,
+  show,
+  onClose,
+  label,
+  type = "text",
+  currentValue,
+}) {
   const [input, setInput] = useState(currentValue);
   const [visible, setVisible] = useState(false);
 
@@ -17,7 +24,10 @@ function EditProfile({ show, onClose, label, type = "text", currentValue }) {
   const inputType = isPassword ? (visible ? "text" : "password") : type;
 
   return (
-    <div className="fixed inset-0 bg-[rgba(0,0,0,0.7)] flex items-center justify-center z-50">
+    <div
+      key={key}
+      className="fixed inset-0 bg-[rgba(0,0,0,0.7)] flex items-center justify-center z-50"
+    >
       <div className="bg-white p-6 rounded-xl shadow-xl w-96 relative">
         <h2 className="text-lg font-semibold mb-4">Edit {label}</h2>
 

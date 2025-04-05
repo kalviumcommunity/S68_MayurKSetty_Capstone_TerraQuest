@@ -11,7 +11,9 @@ function Profile() {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/getuser");
+        const response = await axios.get("http://localhost:3000/api/getuser", {
+          withCredentials: true,
+        });
 
         if (!response.data) {
           return console.log("There was an error fetching the data");
@@ -68,6 +70,7 @@ function Profile() {
 
       {/* Edit Field Popup */}
       <EditProfile
+        key={showEdit}
         show={!!showEdit}
         onClose={() => setShowEdit(null)}
         label={showEdit || ""}
