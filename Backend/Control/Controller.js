@@ -99,7 +99,7 @@ const getOne = async (req, res) => {
     if (!userexist) {
       return res.status(404).json({ Message: 'The user could not be found!' });
     }
-    
+
     res.status(200).json({ Message: 'User Found!', Userdata: userexist });
   } catch (err) {
     console.error('Error finding user:', err);
@@ -223,14 +223,14 @@ const editOne = async (req, res) => {
 const uploadImage = async (req, res) => {
   try {
     if (!req.file) {
-      console.log("there was an error getting th file");
+      console.log('there was an error getting th file');
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
     // Upload file to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path , {folder:'TerraQuest'});
+    const result = await cloudinary.uploader.upload(req.file.path, { folder: 'TerraQuest' });
     if (!result) {
-      console.log("there was an error in uploading");
+      console.log('there was an error in uploading');
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
@@ -238,11 +238,15 @@ const uploadImage = async (req, res) => {
     fs.unlinkSync(req.file.path);
 
     const userId = req.user;
-    const updatedprofile = UserModel.findByIdAndUpdate({_id:userId},{profilePic:result.secure_url},{new:true});
+    const updatedprofile = UserModel.findByIdAndUpdate(
+      { _id: userId },
+      { profilePic: result.secure_url },
+      { new: true }
+    );
     console.log(updatedprofile);
 
     // Send Cloudinary URL as response
-    res.json({ url: result.secure_url, profile:updatedprofile });
+    res.json({ url: result.secure_url, profile: updatedprofile });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
