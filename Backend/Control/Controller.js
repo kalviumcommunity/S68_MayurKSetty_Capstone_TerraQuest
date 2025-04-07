@@ -223,34 +223,34 @@ const editOne = async (req, res) => {
 const uploadImage = async (req, res) => {
   try {
     if (!req.file) {
-      console.log('there was an error getting th file');
+      console.log('No file received');
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
     // Upload file to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path, { folder: 'TerraQuest' });
-    if (!result) {
-      console.log('there was an error in uploading');
-      return res.status(400).json({ error: 'No file uploaded' });
-    }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'TerraQuest',
+    });
 
-    // Delete local file after upload
-    fs.unlinkSync(req.file.path);
+    fs.unlinkSync(req.file.path); //deleting locally
 
-    const userId = req.user;
-    const updatedprofile = UserModel.findByIdAndUpdate(
+    //finding updating the newly created url using the usermodel
+    const userId = req.user.id;
+    const updatedprofile = await UserModel.findByIdAndUpdate(
       { _id: userId },
       { profilePic: result.secure_url },
       { new: true }
     );
-    console.log(updatedprofile);
 
-    // Send Cloudinary URL as response
+    console.log('Updated profile:', updatedprofile);
+
     res.json({ url: result.secure_url, profile: updatedprofile });
   } catch (error) {
+    console.error('Upload error:', error.message);
     res.status(500).json({ error: error.message });
   }
 };
+
 
 module.exports = {
   getOne,
