@@ -7,7 +7,7 @@
     "format:file": "prettier --write",
     "format:all": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "server":"nodemon index.js"
+    "server": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

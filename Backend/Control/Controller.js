@@ -251,7 +251,6 @@ const uploadImage = async (req, res) => {
   }
 };
 
-
 module.exports = {
   getOne,
   postOne,
