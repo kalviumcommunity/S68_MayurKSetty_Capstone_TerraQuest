@@ -14,20 +14,36 @@ function ChangeProfilePic({ show, onClose }) {
   };
 
   const handleUpload = async () => {
+    if (!selectedFile) return;
+
     console.log("Upload image:", selectedFile);
-    // TODO: send file to server or Cloudinary
     try {
       setsending(true);
+
+      const formData = new FormData();
+      formData.append("image", selectedFile); // recieves as "image" in the backend...
+
       const sendProfile = await axios.post(
         "http://localhost:3000/api/upload",
-        selectedFile,
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
       );
-      console.log(sendProfile);
-      setsending(false);
+
+      console.log(sendProfile.data);
     } catch (err) {
-      console.log("There was an error while uploading the image:", err);
+      console.log(
+        "There was an error while uploading the image:",
+        err.response?.data || err.message,
+      );
+    } finally {
+      setsending(false);
+      onClose();
     }
-    onClose();
   };
 
   const handleDragOver = (e) => {

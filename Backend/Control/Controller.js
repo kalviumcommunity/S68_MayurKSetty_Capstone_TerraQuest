@@ -94,7 +94,7 @@ const getOne = async (req, res) => {
   }
 
   try {
-    const userexist = await UserModel.findById(userId.id);
+    const userexist = await UserModel.findById(userId);
 
     if (!userexist) {
       return res.status(404).json({ Message: 'The user could not be found!' });
@@ -190,7 +190,7 @@ const login = async (req, res) => {
 const editOne = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const userId = req.params;
+    const userId = req.user;
     console.log(userId);
 
     let user = await UserModel.findById(userId.id);
@@ -223,7 +223,7 @@ const editOne = async (req, res) => {
 const uploadImage = async (req, res) => {
   try {
     if (!req.file) {
-      console.log('No file received');
+      console.log('No file received', req.file);
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
@@ -231,11 +231,13 @@ const uploadImage = async (req, res) => {
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: 'TerraQuest',
     });
+    console.log(result);
 
     fs.unlinkSync(req.file.path); //deleting locally
+    console.log(req.file.path);
 
     //finding updating the newly created url using the usermodel
-    const userId = req.user.id;
+    const userId = req.user;
     const updatedprofile = await UserModel.findByIdAndUpdate(
       { _id: userId },
       { profilePic: result.secure_url },

@@ -124,7 +124,7 @@ Thank you for your interest in contributing to **Terraquest**! Please follow the
 8. **Start the backend server**:  
    ```sh
    cd ../backend
-   node --watch index
+   npm run server
    ```
 9. **Make your changes** and test the functionality.  
 10. **Lint and format your code** before committing:  

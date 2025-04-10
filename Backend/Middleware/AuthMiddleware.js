@@ -9,7 +9,7 @@ const AuthMiddleware = async (req, res, next) => {
 
     // Verifying the token
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verified;
+    req.user = verified.id;
 
     next();
   } catch (error) {
