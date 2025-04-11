@@ -14,12 +14,13 @@ function Profile() {
         const response = await axios.get("http://localhost:3000/api/getuser", {
           withCredentials: true,
         });
+        console.log(response);
 
         if (!response.data) {
           return console.log("There was an error fetching the data");
         }
 
-        setUserData(response.data);
+        setUserData(response.data.Userdata);
       } catch (err) {
         console.log(err);
       }
@@ -34,7 +35,7 @@ function Profile() {
         {/* Profile Picture */}
         <div className="relative w-40 h-40">
           <img
-            src={userData.profileImage}
+            src={userData.profilePic}
             alt="Profile"
             className="w-full h-full object-cover border-4 rounded-full"
           />
