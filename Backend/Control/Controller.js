@@ -233,8 +233,12 @@ const uploadImage = async (req, res) => {
     });
     console.log(result);
 
-    fs.unlinkSync(req.file.path); //deleting locally
-    console.log(req.file.path);
+    try {
+      fs.unlinkSync(req.file.path); //deleting locally
+      console.log('deleted the file locally');
+    } catch (err) {
+      console.log('There was an error delteting image locally', err);
+    }
 
     //finding updating the newly created url using the usermodel
     const userId = req.user;
