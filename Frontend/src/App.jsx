@@ -11,6 +11,7 @@ import Track from "./Pages/Track";
 import Submit from "./Pages/Submit";
 import Community from "./Pages/Community";
 import Profile from "./Pages/Profile";
+import PageNotFound from "./Pages/PageNotFound";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/submit" element={<Submit />} />
         <Route path="/community" element={<Community />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<PageNotFound />} />{" "}
+        {/* if page does not exist! */}
       </Routes>
     </>
   );
