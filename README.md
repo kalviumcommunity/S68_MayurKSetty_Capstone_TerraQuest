@@ -1,7 +1,9 @@
 # **TerraQuest**  
 
 ## **Concept**  
-This platform is inspired by **eBird** and **iNaturalist**, built to foster interest in **wildlife, conservation, birdwatching, and photography**. My passion for nature and technology drove me to create a space where enthusiasts can **log, track, and share** their observations while contributing to conservation efforts.  
+This platform is inspired by [**eBird**](https://ebird.org/) and [**iNaturalist**](https://www.inaturalist.org/), built to foster interest in **[wildlife](https://en.wikipedia.org/wiki/Wildlife)**, **[conservation](https://en.wikipedia.org/wiki/Conservation_biology)**, **[birdwatching](https://en.wikipedia.org/wiki/Birdwatching)**, and **[photography](https://en.wikipedia.org/wiki/Photography)**.  
+My passion for nature and technology drove me to create a space where enthusiasts can **[log, track, and share](https://en.wikipedia.org/wiki/Nature_journal)** their observations while contributing to conservation efforts.
+ 
 
 ### **Core Features:**  
 📍 **Track & Log Sightings** – Users can submit observations of birds, mammals, insects, fungi, and plants.  
@@ -122,7 +124,7 @@ Thank you for your interest in contributing to **Terraquest**! Please follow the
 8. **Start the backend server**:  
    ```sh
    cd ../backend
-   node --watch index
+   npm run server
    ```
 9. **Make your changes** and test the functionality.  
 10. **Lint and format your code** before committing:  

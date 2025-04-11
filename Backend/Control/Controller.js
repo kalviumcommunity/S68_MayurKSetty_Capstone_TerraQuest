@@ -85,16 +85,16 @@ const googleRedirect = async (req, res) => {
 //user manipulation
 
 const getOne = async (req, res) => {
-  const { name, email, password } = req.body;
+  const userId = req.user;
 
-  if (!name || !email || !password) {
+  if (!userId) {
     res.status(400).json({ Message: 'All fields are required.' });
     console.log('All the fields are necessary!');
     return;
   }
 
   try {
-    const userexist = await UserModel.findOne({ email: email });
+    const userexist = await UserModel.findById(userId);
 
     if (!userexist) {
       return res.status(404).json({ Message: 'The user could not be found!' });
@@ -190,7 +190,7 @@ const login = async (req, res) => {
 const editOne = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const userId = req.params;
+    const userId = req.user;
     console.log(userId);
 
     let user = await UserModel.findById(userId.id);
@@ -223,18 +223,32 @@ const editOne = async (req, res) => {
 const uploadImage = async (req, res) => {
   try {
     if (!req.file) {
+      console.log('No file received', req.file);
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
     // Upload file to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path);
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'TerraQuest',
+    });
+    console.log(result);
 
-    // Delete local file after upload
-    fs.unlinkSync(req.file.path);
+    fs.unlinkSync(req.file.path); //deleting locally
+    console.log(req.file.path);
 
-    // Send Cloudinary URL as response
-    res.json({ url: result.secure_url });
+    //finding updating the newly created url using the usermodel
+    const userId = req.user;
+    const updatedprofile = await UserModel.findByIdAndUpdate(
+      { _id: userId },
+      { profilePic: result.secure_url },
+      { new: true }
+    );
+
+    console.log('Updated profile:', updatedprofile);
+
+    res.json({ url: result.secure_url, profile: updatedprofile });
   } catch (error) {
+    console.error('Upload error:', error.message);
     res.status(500).json({ error: error.message });
   }
 };

@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
+import axios from "axios";
 
 function ChangeProfilePic({ show, onClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const dropRef = useRef(null);
+  const [sending, setsending] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -11,10 +13,37 @@ function ChangeProfilePic({ show, onClose }) {
     setPreviewUrl(URL.createObjectURL(file));
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
+    if (!selectedFile) return;
+
     console.log("Upload image:", selectedFile);
-    // TODO: send file to server or Cloudinary
-    onClose();
+    try {
+      setsending(true);
+
+      const formData = new FormData();
+      formData.append("image", selectedFile); // recieves as "image" in the backend...
+
+      const sendProfile = await axios.post(
+        "http://localhost:3000/api/upload",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      console.log(sendProfile.data);
+    } catch (err) {
+      console.log(
+        "There was an error while uploading the image:",
+        err.response?.data || err.message,
+      );
+    } finally {
+      setsending(false);
+      onClose();
+    }
   };
 
   const handleDragOver = (e) => {
@@ -85,10 +114,10 @@ function ChangeProfilePic({ show, onClose }) {
           </button>
           <button
             onClick={handleUpload}
-            disabled={!selectedFile}
+            disabled={!selectedFile || sending}
             className="px-4 py-2 bg-[#94c864] text-white rounded hover:bg-[#85f387] disabled:opacity-50"
           >
-            Upload
+            {sending ? "Uploading..." : "Upload"}
           </button>
         </div>
       </div>
