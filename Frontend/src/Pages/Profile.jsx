@@ -49,7 +49,7 @@ function Profile() {
 
         {/* Info Cards */}
         <div className="flex flex-col mt-20 gap-4 w-full max-w-md">
-          {[userData.name, userData.email, userData.password].map((field) => (
+          {["name", "email", "password"].map((field) => (
             <div
               key={field}
               className="flex justify-between items-center bg-gray-100 border p-4 rounded"
