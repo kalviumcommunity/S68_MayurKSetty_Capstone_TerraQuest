@@ -1,4 +1,4 @@
-# **TerraQuest**  
+![Github frame](https://github.com/user-attachments/assets/80ab60b3-32fa-47b0-a837-e2d7981cd732)
 
 ## **Concept**  
 This platform is inspired by [**eBird**](https://ebird.org/) and [**iNaturalist**](https://www.inaturalist.org/), built to foster interest in **[wildlife](https://en.wikipedia.org/wiki/Wildlife)**, **[conservation](https://en.wikipedia.org/wiki/Conservation_biology)**, **[birdwatching](https://en.wikipedia.org/wiki/Birdwatching)**, and **[photography](https://en.wikipedia.org/wiki/Photography)**.  
