@@ -12,6 +12,7 @@ import Submit from "./Pages/Submit";
 import Community from "./Pages/Community";
 import Profile from "./Pages/Profile";
 import PageNotFound from "./Pages/PageNotFound";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="*" element={<PageNotFound />} />{" "}
         {/* if page does not exist! */}
       </Routes>
+      <Footer />
     </>
   );
 }
