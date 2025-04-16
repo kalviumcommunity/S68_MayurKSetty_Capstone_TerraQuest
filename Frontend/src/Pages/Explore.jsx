@@ -25,8 +25,8 @@ function Explore() {
   return (
     <>
       <div className="h-screen w-screen">
-        {data.map((item) => {
-          return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+          {data.map((item) => (
             <Observation
               key={item._id}
               creatureGuess={item.creatureGuess}
@@ -34,8 +34,8 @@ function Explore() {
               createdAt={item.createdAt}
               userId={item.userId}
             />
-          );
-        })}
+          ))}
+        </div>
       </div>
     </>
   );
