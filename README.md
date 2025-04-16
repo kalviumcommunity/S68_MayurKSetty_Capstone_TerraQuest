@@ -140,4 +140,4 @@ Thank you for your interest in contributing to **Terraquest**! Please follow the
 12. **Open a Pull Request (PR)** on GitHub from your forked repository to the main repository. (Please note that your PR must pass the Workflows assigned. If not your contribution cannot be merged. Please fix the issue and commit again.)  
 13. Once reviewed, your changes will be merged. 🎉
 
-🌏 *TerraQuest — made with ❤️ in India by ***Mayur K Setty***.* All rights reserved!
+🌏 *TerraQuest — made with ❤️ in India by ***[Mayur K Setty](https://github.com/mayur-driod)***.* All rights reserved!
