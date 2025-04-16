@@ -17,7 +17,7 @@ const containerStyle = {
 // default location that is chosen
 const defaultCenter = {
   lat: 12.9234996,
-  lng: 77.4959894,
+  lng: 77.4959894, //coordinates pointing to RV University
 };
 
 const libraries = ["places"]; // Places Library... this is used for the for autocomplete
@@ -99,21 +99,28 @@ const Submit = () => {
     if (selectedPosition) {
       formData.append("latitude", selectedPosition.lat);
       formData.append("longitude", selectedPosition.lng);
+    } else {
+      alert("all fields are required!");
+      return;
     }
     formData.append("timeOfDay", timeOfDay);
     formData.append("creatureGuess", creatureGuess);
 
-    photoFiles.forEach((file, idx) => {
-      formData.append("photos", file, file.name);
+    photoFiles.forEach((file) => {
+      formData.append("image", file);
     });
 
     try {
-      // TODO when doing backend! I need to replace the API to correct endpoint... Still havent decided what it should be.
-      const response = await axios.post("/api/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      const response = await axios.post(
+        "http://localhost:3000/api/submit",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
-      });
+      );
       console.log("Upload successful:", response.data);
     } catch (error) {
       console.error("Error uploading files:", error);
@@ -241,7 +248,7 @@ const Submit = () => {
           </div>
 
           <button
-            className="bg-black text-white text-xl rounded-2xl h-10"
+            className="bg-black text-white text-xl rounded-2xl h-10 hover:bg-gray-900 transition duration-300"
             type="submit"
           >
             Submit Sighting
