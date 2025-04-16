@@ -106,17 +106,21 @@ const Submit = () => {
     formData.append("timeOfDay", timeOfDay);
     formData.append("creatureGuess", creatureGuess);
 
-    photoFiles.forEach((file, idx) => {
+    photoFiles.forEach((file) => {
       formData.append("image", file);
     });
 
     try {
-      // TODO when doing backend! I need to replace the API to correct endpoint... Still havent decided what it should be.
-      const response = await axios.post("/api/submit", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      const response = await axios.post(
+        "http://localhost:3000/api/submit",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
-      });
+      );
       console.log("Upload successful:", response.data);
     } catch (error) {
       console.error("Error uploading files:", error);
@@ -244,7 +248,7 @@ const Submit = () => {
           </div>
 
           <button
-            className="bg-black text-white text-xl rounded-2xl h-10"
+            className="bg-black text-white text-xl rounded-2xl h-10 hover:bg-gray-900 transition duration-300"
             type="submit"
           >
             Submit Sighting
