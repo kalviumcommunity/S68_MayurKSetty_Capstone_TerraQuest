@@ -9,6 +9,8 @@ const {
   googleRedirect,
   uploadImage,
   CreateSighting,
+  fetchAllSighting,
+  getOneUser,
 } = require('../Control/Controller');
 const router = express.Router();
 const multer = require('multer');
@@ -22,6 +24,9 @@ router.post('/signup', postOne);
 router.post('/login', login);
 router.put('/edituser/:id', editOne);
 
+// getting user for generic use
+router.get('/getOneUser/:id', getOneUser);
+
 // google auth
 router.get('/auth/google', googleAuth);
 router.get('/auth/google/callback', googleCallback, googleRedirect);
@@ -32,5 +37,8 @@ router.post('/upload', AuthMiddleware, upload.single('image'), uploadImage);
 
 // submissions
 router.post('/submit', AuthMiddleware, upload.array('image', 5), CreateSighting);
+
+//fetch data
+router.get('/fetchsighting', fetchAllSighting);
 
 module.exports = router;
