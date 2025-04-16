@@ -1,5 +1,6 @@
 // generic imports
 const UserModel = require('../Model/UserSchema');
+const SightingModel = require('../Model/SightingSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -11,6 +12,8 @@ const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 // cloudinary imports
 const cloudinary = require('../Cloudinary/CloudinaryConfig');
 const fs = require('fs');
+const cloudinaryupload = require('../Cloudinary/CloudinaryUpload');
+const CloudinaryUpload = require('../Cloudinary/CloudinaryUpload');
 
 // google authentication endpoints...
 
@@ -257,6 +260,34 @@ const uploadImage = async (req, res) => {
   }
 };
 
+// submitting sighting
+const CreateSighting = async (req, res) => {
+  const { locationVisibility, latitude, longitude, timeOfDay, creatureGuess } = req.body;
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ Error: 'No media has been uploaded!' });
+  }
+  try {
+    const photoURLs = await CloudinaryUpload(req.files, 'TerraQuest/Sightings');
+
+    if (!photoURLs) {
+      return res.status(500).json({ Error: 'There was an error uploading using cloudinary!' });
+    }
+
+    const newsight = await SightingModel.create({
+      locationVisibility,
+      latitude,
+      longitude,
+      timeOfDay,
+      creatureGuess,
+      photoURLs,
+      userId: req.user,
+    });
+    res.status(201).json({ msg: 'Successfully submitted sighting!', sighting: newsight });
+  } catch (err) {
+    res.status(500).json({ Msg: 'There was an internal server error', error: err });
+  }
+};
+
 module.exports = {
   getOne,
   postOne,
@@ -266,4 +297,5 @@ module.exports = {
   googleCallback,
   googleRedirect,
   uploadImage,
+  CreateSighting,
 };

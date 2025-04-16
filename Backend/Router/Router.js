@@ -8,6 +8,7 @@ const {
   googleCallback,
   googleRedirect,
   uploadImage,
+  CreateSighting,
 } = require('../Control/Controller');
 const router = express.Router();
 const multer = require('multer');
@@ -28,5 +29,8 @@ router.get('/auth/google/callback', googleCallback, googleRedirect);
 //Cloudinary
 const upload = multer({ dest: 'uploads/' });
 router.post('/upload', AuthMiddleware, upload.single('image'), uploadImage);
+
+// submissions
+router.post('/submit', AuthMiddleware, upload.array('image', 5), CreateSighting);
 
 module.exports = router;
