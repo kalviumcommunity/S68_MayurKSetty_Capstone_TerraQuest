@@ -222,6 +222,21 @@ const editOne = async (req, res) => {
   }
 };
 
+//getting one perticular user
+
+const getOneUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const userexist = await UserModel.findById(id);
+    if (!userexist) {
+      return res.status(404).json({ Msg: 'The user does not exist!' });
+    }
+    res.status(200).json(userexist);
+  } catch (err) {
+    res.status(500).json({ Msg: 'There seems to be a internal server error', error: err });
+  }
+};
+
 // Cloudinary
 const uploadImage = async (req, res) => {
   try {
@@ -288,6 +303,18 @@ const CreateSighting = async (req, res) => {
   }
 };
 
+const fetchAllSighting = async (req, res) => {
+  try {
+    const response = await SightingModel.find();
+    if (!response) {
+      return res.status(404).json({ Msg: 'No data could be found!' });
+    }
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(500).json({ Msg: 'There was an error fetching the data from atlas!', error: err });
+  }
+};
+
 module.exports = {
   getOne,
   postOne,
@@ -298,4 +325,6 @@ module.exports = {
   googleRedirect,
   uploadImage,
   CreateSighting,
+  fetchAllSighting,
+  getOneUser,
 };
