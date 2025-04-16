@@ -15,9 +15,11 @@ function Home() {
     //   </div>
     // </div>
     <>
-      <Dashboard />
-      <Notification />
-      <Schedule />
+      <div className="h-screen w-screen">
+        <Dashboard />
+        <Notification />
+        <Schedule />
+      </div>
     </>
   );
 }
