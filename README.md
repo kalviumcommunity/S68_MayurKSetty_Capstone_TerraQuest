@@ -14,29 +14,29 @@ My passion for nature and technology drove me to create a space where enthusiast
 
 ---
 
-(This is just the plan... It is subject to changes)
+(This is just the plan... It is subject to changes. )
 
 ## **Tech Stack**  
 
 ### **Frontend (React + Vite)**  
-- **Framework**: React.js with Vite (for fast performance)  
-- **UI Library**: Tailwind CSS / ShadCN (modern and responsive UI)  
-- **Maps & Geolocation**: Leaflet.js / Google Maps API (interactive mapping)  
+- **Framework**: React.js with Vite 
+- **UI Library**: Tailwind CSS
+- **Maps & Geolocation**: Google Maps API (interactive mapping)  
 - **File Storage**: Firebase Storage / Cloudinary (for media uploads)  
-- **Authentication**: NextAuth.js / Firebase Auth (JWT & Google OAuth)  
+- **Authentication**: JWT & Google OAuth  
 
 ### **Backend (Node.js + Express + MongoDB)**  
 - **Framework**: Express.js (REST API development)  
 - **Database**: MongoDB + Mongoose (flexible document storage)  
 - **Authentication**: JWT-based authentication & Google OAuth  
 - **Geospatial Queries**: MongoDB’s `$geoNear` (find nearby sightings & trails)  
-- **API Integrations**: Google Maps API, eBird API, iNaturalist API (for future enhancements)  
+- **API Integrations**: Google Maps API, ( eBird API, iNaturalist (if it exists, for further integrations between platforms) )
 
 ### **Deployment & DevOps**  
-- **Frontend Deployment**: Vercel / Netlify  
-- **Backend Deployment**: Railway / Render / DigitalOcean  
+- **Frontend Deployment**: Vercel / Netlify (Current) / Cloudflare  
+- **Backend Deployment**: Railway / Render (Current) / DigitalOcean / Google Cloud Run  
 - **Database Hosting**: MongoDB Atlas  
-- **Storage**: Firebase Storage / Cloudinary  
+- **Storage**: Cloudinary  
 - **Monitoring & Logs**: LogRocket (frontend) + Datadog (backend)  
 
 ---
@@ -88,6 +88,10 @@ Check out the **main project roadmap** for the latest progress and feature imple
 This document serves as a **brief assignment overview** and will evolve as development progresses.  
 
 [Frontend Deploy](https://terraquest.netlify.app/)
+
+[Backend Deploy](https://terraquest-5ye5.onrender.com)
+
+Please note that the deployed links may not work as intended yet... They still need to be integrated together!
 
 [Documentation](https://docs.google.com/document/d/1U3TmqffF8EQVwXoUP9U88xDnMpCyP3nO3NMakEZGK_0/edit?usp=sharing)
 
