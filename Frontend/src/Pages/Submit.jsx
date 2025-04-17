@@ -122,6 +122,7 @@ const Submit = () => {
         },
       );
       console.log("Upload successful:", response.data);
+      alert("Successfully submitted!");
     } catch (error) {
       console.error("Error uploading files:", error);
     }
@@ -180,7 +181,9 @@ const Submit = () => {
           <div className="flex flex-row items-start justify-around p-10 rounded-2xl bg-[rgba(224,165,86,0.7)]">
             {/* Creature Identification */}
             <div className="creature-section">
-              <label htmlFor="creatureGuess">What did you think it was?</label>
+              <label htmlFor="creatureGuess" className="font-bold">
+                What did you think it was?
+              </label>
               <input
                 type="text"
                 id="creatureGuess"
@@ -200,7 +203,9 @@ const Submit = () => {
               >
                 {/* Photo Upload with the Preview */}
                 <div className="photo-upload-section">
-                  <label htmlFor="photos">Upload Photos:</label>
+                  <label htmlFor="photos" className="font-bold">
+                    Upload Photos:
+                  </label>
 
                   {/* Drag-and-Drop Box */}
                   <div
@@ -236,9 +241,11 @@ const Submit = () => {
 
               {/* choose the time of observation */}
               <div className="bg-white rounded-xl p-6 flex flex-row justify-around items-center">
-                <label htmlFor="timeOfDay">Time of Sighting:</label>
+                <label htmlFor="timeOfDay" className="pr-2 font-bold">
+                  Time of Sighting:
+                </label>
                 <input
-                  type="time"
+                  type="datetime-local"
                   id="timeOfDay"
                   value={timeOfDay}
                   onChange={(e) => setTimeOfDay(e.target.value)}
