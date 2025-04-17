@@ -11,9 +11,11 @@ const {
   CreateSighting,
   fetchAllSighting,
   getOneUser,
+  logoutUser,
 } = require('../Control/Controller');
 const router = express.Router();
 const multer = require('multer');
+const reduxget = require('../Control/ReduxUser');
 
 //middleware
 const AuthMiddleware = require('../Middleware/AuthMiddleware');
@@ -23,6 +25,7 @@ router.get('/getuser', AuthMiddleware, getOne);
 router.post('/signup', postOne);
 router.post('/login', login);
 router.put('/edituser/:id', editOne);
+router.post('/logout', AuthMiddleware, logoutUser);
 
 // getting user for generic use
 router.get('/getOneUser/:id', getOneUser);
@@ -40,5 +43,8 @@ router.post('/submit', AuthMiddleware, upload.array('image', 5), CreateSighting)
 
 //fetch data
 router.get('/fetchsighting', fetchAllSighting);
+
+//redux
+router.get('/me', AuthMiddleware, reduxget);
 
 module.exports = router;

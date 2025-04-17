@@ -179,7 +179,7 @@ const login = async (req, res) => {
       //success
       message: 'Login successful',
       token,
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { ...user._doc },
     });
     console.log('success');
   } catch (error) {
@@ -187,6 +187,18 @@ const login = async (req, res) => {
     console.error('Login Error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
+};
+
+// Logout
+
+const logoutUser = (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  });
+
+  res.json({ message: 'Logged out successfully' });
 };
 
 // put request for editing any of the user fields
@@ -327,4 +339,5 @@ module.exports = {
   CreateSighting,
   fetchAllSighting,
   getOneUser,
+  logoutUser,
 };
