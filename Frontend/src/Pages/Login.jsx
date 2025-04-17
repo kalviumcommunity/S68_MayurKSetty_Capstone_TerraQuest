@@ -6,7 +6,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { GoogleLogin } from "@react-oauth/google";
 
 import { useDispatch } from "react-redux";
-import { login } from "../redux/userSlice"; //redux
+import { login } from "../redux/userSlice"; //reduxa
 import { useNavigate } from "react-router-dom";
 
 function Login() {
