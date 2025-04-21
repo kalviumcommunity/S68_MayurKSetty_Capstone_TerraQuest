@@ -1,37 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function Dashboard({
-  img,
-  name,
-  message,
-  weather,
-  streak,
-  leaderboard,
-  events,
-}) {
+function Dashboard({ name, message, streak, leaderboard, events }) {
+  const [weather, setweather] = useState([]);
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        try {
+          const res = await fetch(
+            `http://localhost:3000/api/weather?lat=${latitude}&lon=${longitude}`,
+          );
+          const data = await res.json();
+          // console.log('Weather data:', data);
+          setweather(data);
+        } catch (error) {
+          console.error("Error fetching weather:", error);
+        }
+      },
+      (err) => {
+        console.error("Geolocation error:", err);
+      },
+    );
+  }, []);
 
   return (
     <div className="p-4 m-4 w-5xl h-60 bg-gray-200 rounded-lg shadow-lg flex flex-col md:flex-row items-center md:items-start gap-4">
       {/* Profile Section */}
       <div className="flex items-center gap-4 w-full md:w-1/2">
-        <img
-          src={img}
-          alt="Profile"
-          className="w-16 h-16 rounded-full border-5 border-gradient-to-r from-[#59B700] via-[#7a8a6b] to-[#838080]"
-        />
+        {currentUser ? (
+          <img
+            src={currentUser.profilePic}
+            alt="Profile"
+            className="w-16 h-16 rounded-full border-5 border-gradient-to-r from-[#59B700] via-[#7a8a6b] to-[#838080]"
+          />
+        ) : (
+          <img
+            src="https://res.cloudinary.com/dh4zgual6/image/upload/v1743779736/user_1_vy5jcs.png"
+            alt="Profile"
+            className="w-16 h-16 rounded-full border-5 border-gradient-to-r from-[#59B700] via-[#7a8a6b] to-[#838080]"
+          />
+        )}
         <div>
           <h1 className="text-2xl font-bold">
-            Good Morning, {"Mayur"}
+            Good Morning, {currentUser ? currentUser.name : "unknown user"}
             {name}!
           </h1>
           <p className="text-sm text-gray-600">{message}</p>
           <div className="flex items-center gap-2 mt-2">
             <span className="text-lg">☀️</span>
             <h3 className="text-sm">
-              {weather}
-              {"31 degrees celcius"}
+              {weather?.main
+                ? `${weather.main.temp}°C, ${weather.weather[0].description}`
+                : "Loading weather..."}
             </h3>
           </div>
         </div>

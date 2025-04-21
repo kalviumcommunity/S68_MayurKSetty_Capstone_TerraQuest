@@ -16,6 +16,7 @@ const {
 const router = express.Router();
 const multer = require('multer');
 const reduxget = require('../Control/ReduxUser');
+const { getWeather } = require('../Control/WeatherControl');
 
 //middleware
 const AuthMiddleware = require('../Middleware/AuthMiddleware');
@@ -46,5 +47,8 @@ router.get('/fetchsighting', fetchAllSighting);
 
 //redux
 router.get('/me', AuthMiddleware, reduxget);
+
+//weather
+router.get('/weather', getWeather);
 
 module.exports = router;
