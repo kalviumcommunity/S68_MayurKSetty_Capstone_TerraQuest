@@ -17,7 +17,7 @@ function Dashboard({ name, message, streak, leaderboard, events }) {
             `http://localhost:3000/api/weather?lat=${latitude}&lon=${longitude}`,
           );
           const data = await res.json();
-          // console.log('Weather data:', data);
+          console.log(data);
           setweather(data);
         } catch (error) {
           console.error("Error fetching weather:", error);
@@ -34,6 +34,15 @@ function Dashboard({ name, message, streak, leaderboard, events }) {
     if (hour < 12) return "Good Morning";
     if (hour < 18) return "Good Afternoon";
     return "Good Evening";
+  };
+
+  const getTimeOfDayIcon = () => {
+    const hour = new Date().getHours();
+    if (hour < 4) return "🌙"; // Early Morning
+    if (hour < 7) return "🌅"; // Morning
+    if (hour < 16) return "☀️"; // Afternoon
+    if (hour < 18) return "🌇"; // Evening
+    return "🌙"; // Night
   };
 
   return (
@@ -58,12 +67,14 @@ function Dashboard({ name, message, streak, leaderboard, events }) {
             {getGreeting()}, {currentUser ? currentUser.name : "unknown user"}!
           </h1>
           <p className="text-sm text-gray-600">{message}</p>
-          <div className="flex items-center gap-2 mt-2">
-            <span className="text-lg">☀️</span>
+          <div className="flex items-start gap-2 mt-2">
+            <span className="text-lg">{getTimeOfDayIcon()}</span>
             <h3 className="text-sm">
               {weather?.main
-                ? `${weather.main.temp}°C, ${weather.weather[0].description}`
+                ? `${weather.main.temp.toFixed(1)}°C, ${weather.weather[0].description}`
                 : "Loading weather..."}
+              <br />
+              {weather?.name ? `${weather.name}` : "Loading location..."}
             </h3>
           </div>
         </div>
