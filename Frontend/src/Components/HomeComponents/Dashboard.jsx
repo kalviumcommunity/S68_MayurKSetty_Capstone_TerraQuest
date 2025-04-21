@@ -29,6 +29,13 @@ function Dashboard({ name, message, streak, leaderboard, events }) {
     );
   }, []);
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning";
+    if (hour < 18) return "Good Afternoon";
+    return "Good Evening";
+  };
+
   return (
     <div className="p-4 m-4 w-5xl h-60 bg-gray-200 rounded-lg shadow-lg flex flex-col md:flex-row items-center md:items-start gap-4">
       {/* Profile Section */}
@@ -48,8 +55,7 @@ function Dashboard({ name, message, streak, leaderboard, events }) {
         )}
         <div>
           <h1 className="text-2xl font-bold">
-            Good Morning, {currentUser ? currentUser.name : "unknown user"}
-            {name}!
+            {getGreeting()}, {currentUser ? currentUser.name : "unknown user"}!
           </h1>
           <p className="text-sm text-gray-600">{message}</p>
           <div className="flex items-center gap-2 mt-2">
