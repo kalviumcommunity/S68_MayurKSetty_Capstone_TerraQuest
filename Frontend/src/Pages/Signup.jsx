@@ -4,6 +4,7 @@ import background from "../assets/Backgrounds/Login-signup-bg.png";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [formdata, setformdata] = useState({
@@ -14,6 +15,7 @@ function Signup() {
   });
 
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +43,7 @@ function Signup() {
           password: "",
           confirmPassword: "",
         });
+        navigate("/login");
       } catch (err) {
         console.log(
           "There was an error while sending signup from frontend!",
