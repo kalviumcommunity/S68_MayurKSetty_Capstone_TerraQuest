@@ -19,9 +19,16 @@ import Profile from "./Pages/Profile";
 import PageNotFound from "./Pages/PageNotFound";
 import Footer from "./Components/Footer";
 import Submissions from "./Pages/Submissions";
+import PrivateRoute from "./Components/Private/PrivateRoute";
+
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Mainpage from "./Pages/Mainpage";
 
 function App() {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -44,16 +51,58 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={currentUser ? <Home /> : <Mainpage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/learn" element={<Learn />} />
-        <Route path="/track" element={<Track />} />
-        <Route path="/submit" element={<Submit />} />
+        <Route
+          path="/explore"
+          element={
+            <PrivateRoute>
+              <Explore />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/learn"
+          element={
+            <PrivateRoute>
+              <Learn />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/track"
+          element={
+            <PrivateRoute>
+              <Track />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/submit"
+          element={
+            <PrivateRoute>
+              <Submit />
+            </PrivateRoute>
+          }
+        />
         <Route path="/community" element={<Community />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/submissions" element={<Submissions />} />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/submissions"
+          element={
+            <PrivateRoute>
+              <Submissions />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<PageNotFound />} />{" "}
         {/* if page does not exist! */}
       </Routes>
