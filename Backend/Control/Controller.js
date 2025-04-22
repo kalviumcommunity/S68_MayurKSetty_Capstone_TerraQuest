@@ -1,5 +1,6 @@
 // generic imports
 const UserModel = require('../Model/UserSchema');
+const SightingModel = require('../Model/SightingSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -11,6 +12,8 @@ const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 // cloudinary imports
 const cloudinary = require('../Cloudinary/CloudinaryConfig');
 const fs = require('fs');
+const cloudinaryupload = require('../Cloudinary/CloudinaryUpload');
+const CloudinaryUpload = require('../Cloudinary/CloudinaryUpload');
 
 // google authentication endpoints...
 
@@ -176,7 +179,7 @@ const login = async (req, res) => {
       //success
       message: 'Login successful',
       token,
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { ...user._doc },
     });
     console.log('success');
   } catch (error) {
@@ -184,6 +187,18 @@ const login = async (req, res) => {
     console.error('Login Error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
+};
+
+// Logout
+
+const logoutUser = (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  });
+
+  res.json({ message: 'Logged out successfully' });
 };
 
 // put request for editing any of the user fields
@@ -216,6 +231,21 @@ const editOne = async (req, res) => {
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+//getting one perticular user
+
+const getOneUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const userexist = await UserModel.findById(id);
+    if (!userexist) {
+      return res.status(404).json({ Msg: 'The user does not exist!' });
+    }
+    res.status(200).json(userexist);
+  } catch (err) {
+    res.status(500).json({ Msg: 'There seems to be a internal server error', error: err });
   }
 };
 
@@ -257,6 +287,46 @@ const uploadImage = async (req, res) => {
   }
 };
 
+// submitting sighting
+const CreateSighting = async (req, res) => {
+  const { locationVisibility, latitude, longitude, timeOfDay, creatureGuess } = req.body;
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ Error: 'No media has been uploaded!' });
+  }
+  try {
+    const photoURLs = await CloudinaryUpload(req.files, 'TerraQuest/Sightings');
+
+    if (!photoURLs) {
+      return res.status(500).json({ Error: 'There was an error uploading using cloudinary!' });
+    }
+
+    const newsight = await SightingModel.create({
+      locationVisibility,
+      latitude,
+      longitude,
+      timeOfDay,
+      creatureGuess,
+      photoURLs,
+      userId: req.user,
+    });
+    res.status(201).json({ msg: 'Successfully submitted sighting!', sighting: newsight });
+  } catch (err) {
+    res.status(500).json({ Msg: 'There was an internal server error', error: err });
+  }
+};
+
+const fetchAllSighting = async (req, res) => {
+  try {
+    const response = await SightingModel.find();
+    if (!response) {
+      return res.status(404).json({ Msg: 'No data could be found!' });
+    }
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(500).json({ Msg: 'There was an error fetching the data from atlas!', error: err });
+  }
+};
+
 module.exports = {
   getOne,
   postOne,
@@ -266,4 +336,8 @@ module.exports = {
   googleCallback,
   googleRedirect,
   uploadImage,
+  CreateSighting,
+  fetchAllSighting,
+  getOneUser,
+  logoutUser,
 };

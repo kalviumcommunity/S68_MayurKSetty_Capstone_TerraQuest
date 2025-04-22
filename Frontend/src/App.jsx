@@ -1,6 +1,11 @@
 import React from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "./redux/userSlice";
+import axios from "axios";
+
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -15,6 +20,25 @@ import PageNotFound from "./Pages/PageNotFound";
 import Footer from "./Components/Footer";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/me", {
+          withCredentials: true,
+        });
+        console.log(res);
+
+        dispatch(login(res.data.user));
+      } catch (err) {
+        console.log("User not logged in or token invalid.", err);
+      }
+    };
+
+    fetchUser();
+  }, [dispatch]);
+
   return (
     <>
       <Navbar />

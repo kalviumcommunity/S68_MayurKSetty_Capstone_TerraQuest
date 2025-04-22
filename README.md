@@ -1,4 +1,4 @@
-# **TerraQuest**  
+![Github frame](https://github.com/user-attachments/assets/80ab60b3-32fa-47b0-a837-e2d7981cd732)
 
 ## **Concept**  
 This platform is inspired by [**eBird**](https://ebird.org/) and [**iNaturalist**](https://www.inaturalist.org/), built to foster interest in **[wildlife](https://en.wikipedia.org/wiki/Wildlife)**, **[conservation](https://en.wikipedia.org/wiki/Conservation_biology)**, **[birdwatching](https://en.wikipedia.org/wiki/Birdwatching)**, and **[photography](https://en.wikipedia.org/wiki/Photography)**.  
@@ -14,29 +14,29 @@ My passion for nature and technology drove me to create a space where enthusiast
 
 ---
 
-(This is just the plan... It is subject to changes)
+(This is just the plan... It is subject to changes. )
 
 ## **Tech Stack**  
 
 ### **Frontend (React + Vite)**  
-- **Framework**: React.js with Vite (for fast performance)  
-- **UI Library**: Tailwind CSS / ShadCN (modern and responsive UI)  
-- **Maps & Geolocation**: Leaflet.js / Google Maps API (interactive mapping)  
+- **Framework**: React.js with Vite 
+- **UI Library**: Tailwind CSS
+- **Maps & Geolocation**: Google Maps API (interactive mapping)  
 - **File Storage**: Firebase Storage / Cloudinary (for media uploads)  
-- **Authentication**: NextAuth.js / Firebase Auth (JWT & Google OAuth)  
+- **Authentication**: JWT & Google OAuth  
 
 ### **Backend (Node.js + Express + MongoDB)**  
 - **Framework**: Express.js (REST API development)  
 - **Database**: MongoDB + Mongoose (flexible document storage)  
 - **Authentication**: JWT-based authentication & Google OAuth  
 - **Geospatial Queries**: MongoDB’s `$geoNear` (find nearby sightings & trails)  
-- **API Integrations**: Google Maps API, eBird API, iNaturalist API (for future enhancements)  
+- **API Integrations**: Google Maps API, ( eBird API, iNaturalist (if it exists, for further integrations between platforms) )
 
 ### **Deployment & DevOps**  
-- **Frontend Deployment**: Vercel / Netlify  
-- **Backend Deployment**: Railway / Render / DigitalOcean  
+- **Frontend Deployment**: Vercel / Netlify (Current) / Cloudflare  
+- **Backend Deployment**: Railway / Render (Current) / DigitalOcean / Google Cloud Run  
 - **Database Hosting**: MongoDB Atlas  
-- **Storage**: Firebase Storage / Cloudinary  
+- **Storage**: Cloudinary  
 - **Monitoring & Logs**: LogRocket (frontend) + Datadog (backend)  
 
 ---
@@ -89,6 +89,10 @@ This document serves as a **brief assignment overview** and will evolve as devel
 
 [Frontend Deploy](https://terraquest.netlify.app/)
 
+[Backend Deploy](https://terraquest-5ye5.onrender.com)
+
+Please note that the deployed links may not work as intended yet... They still need to be integrated together!
+
 [Documentation](https://docs.google.com/document/d/1U3TmqffF8EQVwXoUP9U88xDnMpCyP3nO3NMakEZGK_0/edit?usp=sharing)
 
 
@@ -140,4 +144,4 @@ Thank you for your interest in contributing to **Terraquest**! Please follow the
 12. **Open a Pull Request (PR)** on GitHub from your forked repository to the main repository. (Please note that your PR must pass the Workflows assigned. If not your contribution cannot be merged. Please fix the issue and commit again.)  
 13. Once reviewed, your changes will be merged. 🎉
 
-🌏 *TerraQuest — made with ❤️ in India by ***Mayur K Setty***.* All rights reserved!
+🌏 *TerraQuest — made with ❤️ in India by ***[Mayur K Setty](https://github.com/mayur-driod)***.* All rights reserved!

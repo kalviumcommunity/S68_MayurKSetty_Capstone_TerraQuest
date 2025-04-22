@@ -3,11 +3,16 @@ import EditProfile from "../Components/Profile/EditProfile";
 import ChangeProfilePic from "../Components/Profile/ChangeProfilePic";
 import background from "../assets/Backgrounds/Login-signup-bg.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice"; // adjust path
 
 function Profile() {
   const [showEdit, setShowEdit] = useState(null);
   const [showChangePic, setShowChangePic] = useState(false);
   const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getUserData = async () => {
@@ -29,6 +34,20 @@ function Profile() {
 
     getUserData();
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:3000/api/logout",
+        {},
+        { withCredentials: true },
+      );
+      dispatch(logout());
+      navigate("/");
+    } catch (err) {
+      alert("There was an error logging out!", err);
+    }
+  };
 
   return (
     <>
@@ -74,6 +93,16 @@ function Profile() {
               </div>
             ))}
           </div>
+        </div>
+        <div className="flex flex-row justify-center items-center">
+          <button
+            onClick={() => {
+              handleLogout();
+            }}
+            className="bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-white text-3xl px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:from-red-800 hover:via-red-700 hover:to-red-800"
+          >
+            Logout
+          </button>
         </div>
 
         {/* Edit Field Popup */}

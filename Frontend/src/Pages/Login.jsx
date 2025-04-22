@@ -5,6 +5,10 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { GoogleLogin } from "@react-oauth/google";
 
+import { useDispatch } from "react-redux";
+import { login } from "../redux/userSlice"; //reduxa
+import { useNavigate } from "react-router-dom";
+
 function Login() {
   const [formdata, setformdata] = useState({
     email: "",
@@ -12,6 +16,8 @@ function Login() {
   });
 
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handlesubmit = async (e) => {
     e.preventDefault();
@@ -20,11 +26,20 @@ function Login() {
       return;
     }
     try {
-      await axios.post("http://localhost:3000/api/login", formdata, {
-        withCredentials: true,
-      });
-      console.log("Data sent successfully using axios for login!", formdata);
+      const response = await axios.post(
+        "http://localhost:3000/api/login",
+        formdata,
+        {
+          withCredentials: true,
+        },
+      );
+      console.log(
+        "Data sent successfully using axios for login!",
+        response.data.user,
+      );
       setformdata({ email: "", password: "" });
+      dispatch(login(response.data.user));
+      navigate("/");
     } catch (err) {
       console.log("There was an error while sending login from frontend!", err);
     }
