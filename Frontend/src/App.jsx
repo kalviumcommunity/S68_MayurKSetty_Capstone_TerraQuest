@@ -18,6 +18,7 @@ import Community from "./Pages/Community";
 import Profile from "./Pages/Profile";
 import PageNotFound from "./Pages/PageNotFound";
 import Footer from "./Components/Footer";
+import Submissions from "./Pages/Submissions";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
         <Route path="/submit" element={<Submit />} />
         <Route path="/community" element={<Community />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/submissions" element={<Submissions />} />
         <Route path="*" element={<PageNotFound />} />{" "}
         {/* if page does not exist! */}
       </Routes>

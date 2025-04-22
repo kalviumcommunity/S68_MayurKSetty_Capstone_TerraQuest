@@ -90,12 +90,27 @@ function Dashboard({ name, message, streak, leaderboard, events }) {
         </p>
         <div className="flex gap-4 mt-20">
           <button
-            onClick={() => navigate("/submit")}
+            onClick={
+              currentUser
+                ? () => navigate("/submit")
+                : () => {
+                    alert("Please login first!");
+                  }
+            }
             className="bg-gradient-to-br from-[#59B700] via-[#6f964a] to-[#838080] hover:bg-green-600 text-white px-4 py-2 rounded-lg"
           >
             Upload
           </button>
-          <button className="border border-gray-500 text-gray-500 px-4 py-2 rounded-lg">
+          <button
+            onClick={
+              currentUser
+                ? () => navigate("/submissions")
+                : () => {
+                    alert("Please login first!");
+                  }
+            }
+            className="border border-gray-500 text-gray-500 px-4 py-2 rounded-lg"
+          >
             Submissions
           </button>
         </div>
