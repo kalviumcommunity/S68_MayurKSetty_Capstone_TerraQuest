@@ -156,6 +156,12 @@ function Signup() {
               Signup
             </button>
             <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+            <p>
+              Already have an account?{" "}
+              <a className="text-blue-800" href="/login">
+                login
+              </a>
+            </p>
           </form>
         </div>
       </div>

@@ -121,6 +121,12 @@ function Login() {
               Login
             </button>
             <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+            <p>
+              Don't have an account?{" "}
+              <a className="text-blue-800" href="/signup">
+                Signup
+              </a>
+            </p>
           </form>
         </div>
       </div>
