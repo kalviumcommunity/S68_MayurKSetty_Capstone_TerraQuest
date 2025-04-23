@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Menu, X } from "lucide-react"; // or Heroicons if preferred
+import { Menu, X } from "lucide-react"; 
 
 function Navbar() {
   const currentUser = useSelector((state) => state.user.currentUser);
