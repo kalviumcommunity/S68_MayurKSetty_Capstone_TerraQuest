@@ -52,6 +52,10 @@ function Mainpage() {
           </motion.button>
         </div>
 
+        <div className="absolute bottom-4 right-4 text-xs text-white bg-black bg-opacity-50 px-3 py-1 rounded-md z-30 shadow-sm">
+          © Mayur K Setty
+        </div>
+
         {/* Scroll encourage */}
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30 animate-bounce text-white text-sm opacity-75">
           ↓ Scroll to Explore
@@ -88,6 +92,9 @@ function Mainpage() {
             connection with the natural world. Every observation brings us one
             step closer to protecting our planet.
           </motion.p>
+        </div>
+        <div className="absolute bottom-4 right-4 text-xs text-white bg-black bg-opacity-50 px-3 py-1 rounded-md z-30 shadow-sm">
+          © Mayur K Setty
         </div>
       </section>
     </>
