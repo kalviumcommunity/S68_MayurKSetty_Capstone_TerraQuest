@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
@@ -30,22 +30,28 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
 
+  const [checkingAuth, setCheckingAuth] = useState(true); // fixes the reload issue
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await axios.get("http://localhost:3000/api/me", {
           withCredentials: true,
         });
-        console.log(res);
-
         dispatch(login(res.data.user));
       } catch (err) {
         console.log("User not logged in or token invalid.", err);
+      } finally {
+        setCheckingAuth(false);
       }
     };
 
     fetchUser();
   }, [dispatch]);
+
+  if (checkingAuth) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
