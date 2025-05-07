@@ -48,12 +48,21 @@ verifyPayment = async (req, res) => {
     .digest('hex');
 
   if (generatedSignature === razorpay_signature) {
-    const order = await contribute.findOneAndUpdate(
-      { razorpayOrderId: razorpay_order_id },
-      { status: 'PAID', razorpayPaymentId: razorpay_payment_id },
-      { new: true }
-    );
-    res.json({ message: 'Payment verified successfully', order });
+    try {
+      const order = await contribute.findOneAndUpdate(
+        { razorpayOrderId: razorpay_order_id },
+        { status: 'PAID', razorpayPaymentId: razorpay_payment_id },
+        { new: true }
+      );
+      
+      if (!order) {
+        return res.status(404).json({ message: 'Order not found' });
+      }
+      
+      res.json({ message: 'Payment verified successfully', order });
+    } catch (err) {
+      res.status(500).json({ message: 'Database update failed', error: err.message });
+    }
   } else {
     res.status(400).json({ message: 'Payment verification failed' });
   }
