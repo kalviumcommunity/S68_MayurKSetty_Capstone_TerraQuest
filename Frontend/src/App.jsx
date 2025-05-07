@@ -24,6 +24,7 @@ import PrivateRoute from "./Components/Private/PrivateRoute";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Mainpage from "./Pages/Mainpage";
+import Contribute from "./Pages/Contribute";
 
 function App() {
   const dispatch = useDispatch();
@@ -109,6 +110,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/pay" element={<Contribute />} />
         <Route path="*" element={<PageNotFound />} />{" "}
         {/* if page does not exist! */}
       </Routes>
