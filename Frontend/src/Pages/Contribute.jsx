@@ -52,13 +52,6 @@ function Contribute() {
             response,
           );
 
-          // 3. Save contribution in DB
-          await axios.post("/api/contribute", {
-            Contributer: name,
-            Amount: Number(amount),
-            Message: message || "None",
-          });
-
           alert("Payment successful! Thank you 🎉");
 
           // Clear form
