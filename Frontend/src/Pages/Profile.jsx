@@ -99,7 +99,7 @@ function Profile() {
             onClick={() => {
               handleLogout();
             }}
-            className="bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-white text-3xl px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:from-red-800 hover:via-red-700 hover:to-red-800"
+            className="bg-gradient-to-r from-red-700 via-red-600 to-red-700 flex flex-col justify-center items-center text-white text-3xl px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:from-red-800 hover:via-red-700 hover:to-red-800"
           >
             Logout
           </button>
