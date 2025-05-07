@@ -54,11 +54,11 @@ verifyPayment = async (req, res) => {
         { status: 'PAID', razorpayPaymentId: razorpay_payment_id },
         { new: true }
       );
-      
+
       if (!order) {
         return res.status(404).json({ message: 'Order not found' });
       }
-      
+
       res.json({ message: 'Payment verified successfully', order });
     } catch (err) {
       res.status(500).json({ message: 'Database update failed', error: err.message });
