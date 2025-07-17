@@ -35,7 +35,10 @@ function Signup() {
         password: formdata.password,
       };
       try {
-        await axios.post("http://localhost:3000/api/signup", tosend);
+        await axios.post(
+          "https://terraquest-5ye5.onrender.com/api/signup",
+          tosend,
+        );
         console.log("Data sent successfully using axios for signup!");
         setformdata({
           name: "",
@@ -59,7 +62,7 @@ function Signup() {
   const handleSuccess = async (response) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/google/callback",
+        "https://terraquest-5ye5.onrender.com/api/auth/google/callback",
         {
           token: response.credential, // Google OAuth Token
         },

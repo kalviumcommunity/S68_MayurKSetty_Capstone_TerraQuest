@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Mainpage from "./Pages/Mainpage";
 import Contribute from "./Pages/Contribute";
+import Uptime from "./Pages/Uptime";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,9 +37,12 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://terraquest-5ye5.onrender.com/api/me",
+          {
+            withCredentials: true,
+          },
+        );
         dispatch(login(res.data.user));
       } catch (err) {
         console.log("User not logged in or token invalid.", err);
@@ -111,6 +115,7 @@ function App() {
           }
         />
         <Route path="/pay" element={<Contribute />} />
+        <Route path="/uptime" element={<Uptime />} />
         <Route path="*" element={<PageNotFound />} />{" "}
         {/* if page does not exist! */}
       </Routes>

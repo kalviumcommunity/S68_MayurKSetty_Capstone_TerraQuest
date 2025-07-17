@@ -112,7 +112,7 @@ const Submit = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/submit",
+        "https://terraquest-5ye5.onrender.com/api/submit",
         formData,
         {
           withCredentials: true,

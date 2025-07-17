@@ -31,12 +31,15 @@ function Contribute() {
 
     try {
       // 1. Create Razorpay order from backend
-      const { data } = await axios.post("http://localhost:3000/payment/pay", {
-        Contributer: name,
-        Amount: amount,
-        Contact: contact,
-        Message: message,
-      });
+      const { data } = await axios.post(
+        "https://terraquest-5ye5.onrender.com/payment/pay",
+        {
+          Contributer: name,
+          Amount: amount,
+          Contact: contact,
+          Message: message,
+        },
+      );
 
       // 2. Launch Razorpay checkout
       const options = {
@@ -48,7 +51,7 @@ function Contribute() {
         order_id: data.orderId,
         handler: async function (response) {
           const verifyRes = await axios.post(
-            "http://localhost:3000/payment/verify",
+            "https://terraquest-5ye5.onrender.com/payment/verify",
             response,
           );
 

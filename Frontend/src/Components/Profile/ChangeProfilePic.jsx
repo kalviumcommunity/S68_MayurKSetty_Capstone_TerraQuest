@@ -24,7 +24,7 @@ function ChangeProfilePic({ show, onClose }) {
       formData.append("image", selectedFile); // recieves as "image" in the backend...
 
       const sendProfile = await axios.post(
-        "http://localhost:3000/api/upload",
+        "https://terraquest-5ye5.onrender.com/api/upload",
         formData,
         {
           withCredentials: true,

@@ -27,7 +27,7 @@ function Login() {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/login",
+        "https://terraquest-5ye5.onrender.com/api/login",
         formdata,
         {
           withCredentials: true,
@@ -49,7 +49,7 @@ function Login() {
   const handleSuccess = async (response) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/google/callback",
+        "https://terraquest-5ye5.onrender.com/api/auth/google/callback",
         {
           token: response.credential, // Google OAuth Token
         },
