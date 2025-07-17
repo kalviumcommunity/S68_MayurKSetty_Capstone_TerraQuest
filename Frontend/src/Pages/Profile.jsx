@@ -17,9 +17,12 @@ function Profile() {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/getuser", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "https://terraquest-5ye5.onrender.com/api/getuser",
+          {
+            withCredentials: true,
+          },
+        );
         console.log(response);
 
         if (!response.data) {
@@ -38,7 +41,7 @@ function Profile() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3000/api/logout",
+        "https://terraquest-5ye5.onrender.com/api/logout",
         {},
         { withCredentials: true },
       );

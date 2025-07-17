@@ -1,7 +1,7 @@
 import React from "react";
 
 function Track() {
-  return <div>Track</div>;
+  return <div>Track coming soon...</div>;
 }
 
 export default Track;

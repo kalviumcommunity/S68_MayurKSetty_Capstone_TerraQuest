@@ -14,7 +14,7 @@ function Dashboard({ name, message, streak, leaderboard, events }) {
 
         try {
           const res = await fetch(
-            `http://localhost:3000/api/weather?lat=${latitude}&lon=${longitude}`,
+            `https://terraquest-5ye5.onrender.com/api/weather?lat=${latitude}&lon=${longitude}`,
           );
           const data = await res.json();
           console.log(data);

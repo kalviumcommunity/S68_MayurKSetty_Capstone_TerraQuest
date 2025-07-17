@@ -37,9 +37,12 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://terraquest-5ye5.onrender.com/api/me",
+          {
+            withCredentials: true,
+          },
+        );
         dispatch(login(res.data.user));
       } catch (err) {
         console.log("User not logged in or token invalid.", err);

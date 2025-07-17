@@ -10,7 +10,7 @@ function Observation({ creatureGuess, photoURLs, createdAt, userId }) {
     const finduser = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/getOneUser/${userId}`,
+          `https://terraquest-5ye5.onrender.com/api/getOneUser/${userId}`,
         );
         if (!response) {
           console.log("There is no data");

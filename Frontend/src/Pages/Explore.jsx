@@ -9,7 +9,7 @@ function Explore() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/fetchsighting",
+          "https://terraquest-5ye5.onrender.com/api/fetchsighting",
         );
         setData(response.data);
       } catch (error) {

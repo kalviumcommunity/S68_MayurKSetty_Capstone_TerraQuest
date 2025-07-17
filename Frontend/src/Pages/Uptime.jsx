@@ -7,7 +7,7 @@ const Uptime = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/health")
+      .get("https://terraquest-5ye5.onrender.com/health")
       .then((res) => setMonitors(res.data.monitors))
       .catch((err) => console.error("Failed to fetch health:", err));
   }, []);
