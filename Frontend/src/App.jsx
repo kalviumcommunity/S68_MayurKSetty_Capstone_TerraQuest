@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Mainpage from "./Pages/Mainpage";
 import Contribute from "./Pages/Contribute";
+import Uptime from "./Pages/Uptime";
 
 function App() {
   const dispatch = useDispatch();
@@ -111,6 +112,7 @@ function App() {
           }
         />
         <Route path="/pay" element={<Contribute />} />
+        <Route path="/uptime" element={<Uptime />} />
         <Route path="*" element={<PageNotFound />} />{" "}
         {/* if page does not exist! */}
       </Routes>
