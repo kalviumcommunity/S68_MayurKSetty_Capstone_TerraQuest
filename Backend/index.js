@@ -23,6 +23,10 @@ app.use(cookieParser());
 app.use('/api', router);
 app.use('/payment', paymentrouter);
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ message: 'Server is healthy' });
+}); // this is used for keeping the server alive
+
 app.listen(port, async () => {
   await ConnectDB(url);
   console.log(`The server is running on port:${port} Link: http://localhost:${port}`);
