@@ -15,7 +15,7 @@ const url = process.env.db_url;
 app.use(express.json());
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://terraquest.netlify.app/'],
+    origin: ['http://localhost:5173', 'https://terraquest.netlify.app'],
     credentials: true,
   })
 );
